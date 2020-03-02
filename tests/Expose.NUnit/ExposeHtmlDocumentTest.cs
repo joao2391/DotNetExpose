@@ -1,0 +1,193 @@
+using Expose.Main;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Expose.NUnit
+{
+    public class ExposeHtmlDocumentTest
+    {
+        private ExposeHtmlDocument document;
+        private const int ZERO = 0;
+        private const string URL = //"https://www.w3schools.com/";
+        "https://pt.stackoverflow.com/";
+
+        [SetUp]
+        public void Setup()
+        {
+            document = new ExposeHtmlDocument(URL);      
+        }
+
+        [Test]
+        public async Task CountCss_Should_Return_Value_Grater_Than_Zero_Async()
+        {            
+           
+            int value = await document.CountCSSAsync();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public void CountCss_Should_Return_Value_Grater_Than_Zero()
+        {
+
+            int value = document.CountCss();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public async Task CountJs_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            int value = await document.CountJSAsync();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public void CountJs_Should_Return_Value_Grater_Than_Zero()
+        {
+            int value = document.CountJS();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public async Task CountHtmlElements_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            int value = await document.CountHtmlElementsAsync();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public void CountHtmlElements_Should_Return_Value_Grater_Than_Zero()
+        {
+            int value = document.CountHtmlElements();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public async Task CountMeta_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            int value = await document.CountMetaAsync();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public void CountMeta_Should_Return_Value_Grater_Than_Zero()
+        {
+            int value = document.CountMeta();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public async Task JSContent_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            var hsJS = await document.GetJSContentAsync();
+            int value = hsJS.Count;
+
+            Assert.Greater(value, ZERO);
+
+        }
+
+        [Test]
+        public void GetJSContent_Should_Return_Value_Grater_Than_Zero()
+        {
+            var hsJS = document.GetJSContent();
+            int value = hsJS.Count;
+
+            Assert.Greater(value, ZERO);
+
+        }
+
+        [Test]
+        public async Task GetCSSContent_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            var hsCSS = await document.GetCSSContentAsync();
+            int value = hsCSS.Count;
+
+            Assert.Greater(value, ZERO);
+
+        }
+
+        [Test]
+        public void GetCSSContent_Should_Return_Value_Grater_Than_Zero()
+        {
+            var hsCSS = document.GetCSSContent();
+            int value = hsCSS.Count;
+
+            Assert.Greater(value, ZERO);
+
+        }
+
+        [Test]
+        public async Task CountButtonJSEvents_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            int value = await document.CountButtonJSEventsAsync();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public void CountButtonJSEvents_Should_Return_Value_Grater_Than_Zero()
+        {
+            int value = document.CountButtonJSEvents();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public async Task CountForms_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            int value = await document.CountFormsAsync();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public void CountForms_Should_Return_Value_Grater_Than_Zero()
+        {
+            int value = document.CountForms();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public async Task FormsInfo_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            Dictionary<string,string> dicForms = await document.FormsInfoAsync();
+            int value = dicForms.Count;
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public void FormsInfo_Should_Return_Value_Grater_Than_Zero()
+        {
+            Dictionary<string, string> dicForms = document.FormsInfo();
+            int value = dicForms.Count;
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public async Task GetSizeOfPage_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            long? value = await document.GetSizeOfPageAsync();
+
+            Assert.Greater(value, ZERO);
+        }
+
+        [Test]
+        public void GetSizeOfPage_Should_Return_Value_Grater_Than_Zero()
+        {
+            long? value = document.GetSizeOfPage();
+
+            Assert.Greater(value, ZERO);
+        }
+    }
+}
