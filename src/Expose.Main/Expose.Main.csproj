@@ -5,7 +5,7 @@
     <Authors>João Paulo de Castro Lima</Authors>
     <Company>joao2391</Company>
     <Product>DotNetExpose</Product>
-    <Description>A package that helps you to scrap web pages. It shows to you a lot of information about the page.</Description>
+    <Description>A package that helps you to scrap web pages. It shows you a lot of information about the page.</Description>
     <PackageTags>Scrap, WebScrap, Crawler, WebCrawler</PackageTags>
     <PackageReleaseNotes>Beta version</PackageReleaseNotes>
     <PackageId>DotNetExpose</PackageId>    
@@ -16,11 +16,17 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/joao2391/DotNetExpose</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\JoãoPaulo\source\repos\DotNet_Expose\src\Expose.Main\Expose.Main.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AngleSharp" Version="0.13.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.21" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
 </Project>

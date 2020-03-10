@@ -6,9 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Expose.Main
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ExposeHtmlDocument : IHtmlDocument
     {
         /// <summary>
@@ -321,6 +325,28 @@ namespace Expose.Main
             return sizeOfPage;
         }
 
+        /// <summary>
+        /// Get the report about the html elements
+        /// </summary>
+        /// <returns>JSON with the amount of elements</returns>
+        public async Task<string> GetReportAsync()
+        {
+            string retorno = await GenerateReportAsync();
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Get the report about the html elements
+        /// </summary>
+        /// <returns>JSON with the amount of elements</returns>
+        public string GetReport()
+        {
+            string retorno = GenerateReportAsync().Result;
+
+            return retorno;
+        }
+
         #region Private Methods
 
         private int CountCSSInBodyChildren(ref int countCSS, IDocument document)
@@ -415,6 +441,31 @@ namespace Expose.Main
             }
 
             return dicForm;
+        }
+
+        private async Task<string> GenerateReportAsync()
+        {
+            //var amountCssContent = await GetCSSContentAsync();
+            //var x = amountCssContent.Count;
+
+            ReportHtmlDocument report = new ReportHtmlDocument
+            {
+                AmountButtonJSEvents = await CountButtonJSEventsAsync(),
+                AmountCSS = await CountCSSAsync(),
+                AmountCSSContent = GetCSSContentAsync().Result.Count,
+                AmountForms = await CountFormsAsync(),
+                AmountFormsInfo = FormsInfoAsync().Result.Count,
+                AmountHtmlElements = await CountHtmlElementsAsync(),
+                AmountJS = await CountJSAsync(),
+                AmountJSContent = GetJSContentAsync().Result.Count,
+                AmountMeta = await CountMetaAsync(),
+                Id = new Guid()
+            };
+
+            string retorno = JsonConvert.SerializeObject(report);
+
+            return retorno;
+
         }
 
         #endregion

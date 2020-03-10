@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Expose.Main</name>
+    </assembly>
+    <members>
+        <member name="T:Expose.Main.ExposeHtmlDocument">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Expose.Main.ExposeHtmlDocument._config">
+            <summary>
+            Initial config
+            </summary>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="url">The url that will be "scrapped"</param>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountCSSAsync">
+            <summary>
+            Count the CSS referenced
+            </summary>
+            <returns>Return total of CSS files referenced in the html page</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountCss">
+            <summary>
+            Count the CSS referenced
+            </summary>
+            <returns>Return total of CSS files referenced in the html page</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountJSAsync">
+            <summary>
+            Count the JS referenced
+            </summary>
+            <returns>Return total of JS files referenced in the html page</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountJS">
+            <summary>
+            Count the JS referenced
+            </summary>
+            <returns>Return total of JS files referenced in the html page</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountHtmlElementsAsync">
+            <summary>
+            Count the Html Elements
+            </summary>
+            <returns>Return total of Html Elements</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountHtmlElements">
+            <summary>
+            Count the Html Elements
+            </summary>
+            <returns>Return total of Html Elements</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountMetaAsync">
+            <summary>
+            Count the META elements
+            </summary>
+            <returns>Return total of META elements</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountMeta">
+            <summary>
+            Count the META elements
+            </summary>
+            <returns>Return total of META elements</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetJSContentAsync" -->
+        <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetJSContent" -->
+        <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetCSSContentAsync" -->
+        <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetCSSContent" -->
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountButtonJSEventsAsync">
+            <summary>
+            Count the button events
+            </summary>
+            <returns>The total of events in all of buttons in the html</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountButtonJSEvents">
+            <summary>
+            Count the button events
+            </summary>
+            <returns>The total of events in all of buttons in the html</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountFormsAsync">
+            <summary>
+            Count the amount of Forms in the HTML
+            </summary>
+            <returns>Total of Forms in html page</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountForms">
+            <summary>
+            Count the amount of Forms in the HTML
+            </summary>
+            <returns>Total of Forms in html page</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.FormsInfoAsync">
+            <summary>
+            Information about the forms
+            </summary>
+            <returns>Action and HttpMethod from Form</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.FormsInfo">
+            <summary>
+            Information about the forms
+            </summary>
+            <returns>Action and HttpMethod from Form</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.GetSizeOfPageAsync">
+            <summary>
+            The size of the page
+            </summary>
+            <returns>The size in Kb of the page</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.GetSizeOfPage">
+            <summary>
+            The size of the page
+            </summary>
+            <returns>The size in Kb of the page</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.GetReportAsync">
+            <summary>
+            Get the report about the html elements
+            </summary>
+            <returns>JSON with the amount of elements</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.GetReport">
+            <summary>
+            Get the report about the html elements
+            </summary>
+            <returns>JSON with the amount of elements</returns>
+        </member>
+        <member name="T:Expose.Main.ReportHtmlDocument">
+            <summary>
+            Report about the DOM
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.Id">
+            <summary>
+            The Id of Report
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.AmountCSS">
+            <summary>
+            How many CSS is in the page
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.AmountJS">
+            <summary>
+            How many JS is in the page
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.AmountHtmlElements">
+            <summary>
+            How many Html Elements is in the page
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.AmountMeta">
+            <summary>
+            How many Meta is in the page
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.AmountButtonJSEvents">
+            <summary>
+            How many JS Event is in the page
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.AmountForms">
+            <summary>
+            How many Forms is in the page
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.AmountFormsInfo">
+            <summary>
+            How many Forms info is in the page
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.AmountJSContent">
+            <summary>
+            How many JS Content is in the page
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.AmountCSSContent">
+            <summary>
+            How many CSS Content is in the page
+            </summary>
+        </member>
+    </members>
+</doc>

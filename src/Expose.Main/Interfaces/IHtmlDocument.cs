@@ -26,6 +26,9 @@ namespace Expose.Main.Interfaces
         Task<long?> GetSizeOfPageAsync();
         long? GetSizeOfPage();
 
+        Task<string> GetReportAsync();
+        string GetReport();
+
         Task<Dictionary<string,string>> FormsInfoAsync();
         Dictionary<string, string> FormsInfo();
 

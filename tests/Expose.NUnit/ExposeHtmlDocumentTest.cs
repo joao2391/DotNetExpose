@@ -7,15 +7,12 @@ namespace Expose.NUnit
 {
     public class ExposeHtmlDocumentTest
     {
-        private ExposeHtmlDocument document;
-        private const int ZERO = 0;
-        private const string URL = //"https://www.w3schools.com/";
-        "https://pt.stackoverflow.com/";
+        private ExposeHtmlDocument document;        
 
         [SetUp]
         public void Setup()
         {
-            document = new ExposeHtmlDocument(URL);      
+            document = new ExposeHtmlDocument(Constants.URL_STACKOVERFLOW_PT);      
         }
 
         [Test]
@@ -24,7 +21,7 @@ namespace Expose.NUnit
            
             int value = await document.CountCSSAsync();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -33,7 +30,7 @@ namespace Expose.NUnit
 
             int value = document.CountCss();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -41,15 +38,15 @@ namespace Expose.NUnit
         {
             int value = await document.CountJSAsync();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
         public void CountJs_Should_Return_Value_Grater_Than_Zero()
         {
-            int value = document.CountJS();
+            int value = document.CountJS();            
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -57,7 +54,7 @@ namespace Expose.NUnit
         {
             int value = await document.CountHtmlElementsAsync();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -65,7 +62,7 @@ namespace Expose.NUnit
         {
             int value = document.CountHtmlElements();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -73,7 +70,7 @@ namespace Expose.NUnit
         {
             int value = await document.CountMetaAsync();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -81,7 +78,7 @@ namespace Expose.NUnit
         {
             int value = document.CountMeta();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -90,7 +87,7 @@ namespace Expose.NUnit
             var hsJS = await document.GetJSContentAsync();
             int value = hsJS.Count;
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
 
         }
 
@@ -100,7 +97,7 @@ namespace Expose.NUnit
             var hsJS = document.GetJSContent();
             int value = hsJS.Count;
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
 
         }
 
@@ -110,7 +107,7 @@ namespace Expose.NUnit
             var hsCSS = await document.GetCSSContentAsync();
             int value = hsCSS.Count;
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
 
         }
 
@@ -120,7 +117,7 @@ namespace Expose.NUnit
             var hsCSS = document.GetCSSContent();
             int value = hsCSS.Count;
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
 
         }
 
@@ -129,7 +126,7 @@ namespace Expose.NUnit
         {
             int value = await document.CountButtonJSEventsAsync();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -137,7 +134,7 @@ namespace Expose.NUnit
         {
             int value = document.CountButtonJSEvents();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -145,7 +142,7 @@ namespace Expose.NUnit
         {
             int value = await document.CountFormsAsync();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -153,7 +150,7 @@ namespace Expose.NUnit
         {
             int value = document.CountForms();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -162,7 +159,7 @@ namespace Expose.NUnit
             Dictionary<string,string> dicForms = await document.FormsInfoAsync();
             int value = dicForms.Count;
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -171,7 +168,7 @@ namespace Expose.NUnit
             Dictionary<string, string> dicForms = document.FormsInfo();
             int value = dicForms.Count;
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -179,7 +176,7 @@ namespace Expose.NUnit
         {
             long? value = await document.GetSizeOfPageAsync();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
@@ -187,7 +184,27 @@ namespace Expose.NUnit
         {
             long? value = document.GetSizeOfPage();
 
-            Assert.Greater(value, ZERO);
+            Assert.Greater(value, Constants.ZERO);
+        }
+
+        [Test]
+        public async Task GetReport_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            string json = await document.GetReportAsync();
+            int value = json.Length;
+
+            Assert.Greater(value, Constants.ZERO);
+
+        }
+
+        [Test]
+        public void GetReport_Should_Return_Value_Grater_Than_Zero()
+        {
+            string json = document.GetReport();
+            int value = json.Length;
+
+            Assert.Greater(value, Constants.ZERO);
+
         }
     }
 }
