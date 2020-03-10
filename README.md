@@ -1,13 +1,13 @@
 # DotNetExpose
 
-DotNetExpose is a .Net library for helping you to scrap web pages. It shows to you a lot of information about the page.
+DotNetExpose is a .Net library for helping you to scrap web pages. It shows you a lot of information about the page.
 
 ## Installation
 
 Use the package manager to install.
 
 ```bash
-install-package dotnetexpose
+Install-Package DotNetExpose -Version 1.0.0
 ```
 
 ## Usage
