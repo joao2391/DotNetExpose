@@ -52,9 +52,9 @@ Return all the CSS content
 ```C#
 HashSet<String> hsCSS =  expose.GetCSSContentAsync();
 ```
-Return the total of JS events in all elements in the html
+Return the total of onclick events in all elements in the html
 ```C#
-int countJSEvents = expose.CountButtonJSEventsAsync();
+int countOnclickEvents = expose.CountOnclickEventsAsync();
 ```
 Return the total of Forms in html page
 ```C#
