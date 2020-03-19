@@ -122,17 +122,17 @@ namespace Expose.NUnit
         }
 
         [Test]
-        public async Task CountButtonJSEvents_Should_Return_Value_Grater_Than_Zero_Async()
+        public async Task CountJSEvents_Should_Return_Value_Grater_Than_Zero_Async()
         {
-            int value = await document.CountButtonJSEventsAsync();
+            int value = await document.CountOnclickEventsAsync();
 
             Assert.Greater(value, Constants.ZERO);
         }
 
         [Test]
-        public void CountButtonJSEvents_Should_Return_Value_Grater_Than_Zero()
+        public void CountJSEvents_Should_Return_Value_Grater_Than_Zero()
         {
-            int value = document.CountButtonJSEvents();
+            int value = document.CountOnclickEvents();
 
             Assert.Greater(value, Constants.ZERO);
         }

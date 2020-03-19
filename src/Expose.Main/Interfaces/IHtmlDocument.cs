@@ -17,8 +17,8 @@ namespace Expose.Main.Interfaces
         Task<int> CountMetaAsync();
         int CountMeta();
 
-        Task<int> CountButtonJSEventsAsync();
-        int CountButtonJSEvents();
+        Task<int> CountOnclickEventsAsync();
+        int CountOnclickEvents();
 
         Task<int> CountFormsAsync();
         int CountForms();

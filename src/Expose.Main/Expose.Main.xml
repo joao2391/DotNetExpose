@@ -72,17 +72,17 @@
         <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetJSContent" -->
         <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetCSSContentAsync" -->
         <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetCSSContent" -->
-        <member name="M:Expose.Main.ExposeHtmlDocument.CountButtonJSEventsAsync">
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountOnclickEventsAsync">
             <summary>
-            Count the button events
+            Count the onclick events
             </summary>
-            <returns>The total of events in all of buttons in the html</returns>
+            <returns>The total of onclick events in all elements in the html</returns>
         </member>
-        <member name="M:Expose.Main.ExposeHtmlDocument.CountButtonJSEvents">
+        <member name="M:Expose.Main.ExposeHtmlDocument.CountOnclickEvents">
             <summary>
-            Count the button events
+            Count the onclick events
             </summary>
-            <returns>The total of events in all of buttons in the html</returns>
+            <returns>The total of onclick events in all elements in the html</returns>
         </member>
         <member name="M:Expose.Main.ExposeHtmlDocument.CountFormsAsync">
             <summary>

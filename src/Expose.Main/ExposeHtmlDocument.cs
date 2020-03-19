@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace Expose.Main
 {
     /// <summary>
-    /// 
+    /// Expose a lot of information about the page
     /// </summary>
     public class ExposeHtmlDocument : IHtmlDocument
     {
@@ -22,6 +22,7 @@ namespace Expose.Main
         private readonly IBrowsingContext _browsingContext;
         private readonly IDocument _document;
         private string _url = string.Empty;
+        
 
         /// <summary>
         /// Constructor
@@ -219,10 +220,10 @@ namespace Expose.Main
         }
 
         /// <summary>
-        /// Count the button events
+        /// Count the onclick events
         /// </summary>
-        /// <returns>The total of events in all of buttons in the html</returns>
-        public async Task<int> CountButtonJSEventsAsync()
+        /// <returns>The total of onclick events in all elements in the html</returns>
+        public async Task<int> CountOnclickEventsAsync()
         {            
             int countEvents = 0;
 
@@ -232,14 +233,14 @@ namespace Expose.Main
         }
 
         /// <summary>
-        /// Count the button events
+        /// Count the onclick events
         /// </summary>
-        /// <returns>The total of events in all of buttons in the html</returns>
-        public int CountButtonJSEvents()
+        /// <returns>The total of onclick events in all elements in the html</returns>
+        public int CountOnclickEvents()
         {
             int countEvents = 0;
 
-            //countEvents = CountJSEvents().Result;
+            countEvents = CountJSEvents().Result;
 
             return countEvents;
         }
@@ -403,24 +404,54 @@ namespace Expose.Main
             var result = await client.GetAsync(_url).Result.Content.ReadAsStringAsync();
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(result);
-                        
-            var body = doc.DocumentNode.SelectSingleNode("//body");
 
+            var body = doc.DocumentNode.SelectSingleNode("//body");
+            
             for (int i = 0; i < body.ChildNodes.Count; i++)
             {
-                if (body.ChildNodes[i].ChildNodes.Count > 0)
+
+                if (body.ChildNodes[i].Attributes.Contains("onclick"))
                 {
+                    countEvents++;
+                    
+                    continue;
+
+                }else if (body.ChildNodes[i].HasChildNodes)
+                {                   
+
                     for (int j = 0; j < body.ChildNodes[i].ChildNodes.Count; j++)
                     {
-                        if (body.ChildNodes[i].ChildNodes[j].Attributes.Contains("onclick"))
-                        {
-                            countEvents++;
-
-                        }
+                        CountRec(ref countEvents, body.ChildNodes[i].ChildNodes[j]);
                     }
                 }
+
             }
 
+            return countEvents;
+        }
+
+        private int CountRec(ref int countEvents, HtmlNode childNodes)
+        {
+            if (childNodes.HasChildNodes)
+            {
+                for (int i = 0; i < childNodes.ChildNodes.Count; i++)
+                {
+                    if (childNodes.ChildNodes[i].Attributes.Contains("onclick"))
+                    {                        
+                        countEvents++;                        
+                    }
+                    else
+                    {                        
+                        CountRec(ref countEvents, childNodes.ChildNodes[i]);                        
+                    }
+                    
+                }
+            }
+            else if(childNodes.Attributes.Contains("onclick"))
+            {
+                countEvents++;
+                
+            }         
 
             return countEvents;
         }
@@ -445,12 +476,10 @@ namespace Expose.Main
 
         private async Task<string> GenerateReportAsync()
         {
-            //var amountCssContent = await GetCSSContentAsync();
-            //var x = amountCssContent.Count;
 
             ReportHtmlDocument report = new ReportHtmlDocument
             {
-                AmountButtonJSEvents = await CountButtonJSEventsAsync(),
+                AmountButtonJSEvents = await CountOnclickEventsAsync(),
                 AmountCSS = await CountCSSAsync(),
                 AmountCSSContent = GetCSSContentAsync().Result.Count,
                 AmountForms = await CountFormsAsync(),
