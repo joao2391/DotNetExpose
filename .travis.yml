@@ -1,10 +1,12 @@
 language: csharp
 solution: Expose.sln
-mono: none
 dotnet: 2.1.502
 install:
-  - nuget restore Expose.sln
+  - curl -L -o nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+  - mono nuget.exe restore Expose.sln
+  - dotnet restore
   - nuget install NUnit.Console -Version 3.12.0 -OutputDirectory testrunner
 script:
+  - dotnet build -c Release
   - msbuild /p:Configuration=Release Expose.sln
   - mono ./testrunner/NUnit.ConsoleRunner.3.12.0/tools/nunit3-console.exe ./tests/Expose.NUnit\bin\Release\netcoreapp2.1\Expose.NUnit.dll
