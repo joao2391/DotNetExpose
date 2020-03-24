@@ -6,7 +6,7 @@
     <members>
         <member name="T:Expose.Main.ExposeHtmlDocument">
             <summary>
-            
+            Expose a lot of information about the page
             </summary>
         </member>
         <member name="F:Expose.Main.ExposeHtmlDocument._config">
@@ -132,6 +132,30 @@
             </summary>
             <returns>JSON with the amount of elements</returns>
         </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.GetOnClickValueAsync">
+            <summary>
+            The onclick event value
+            </summary>
+            <returns>HashSet containing onclick events value</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.GetOnClickValue">
+            <summary>
+            The onclick event value
+            </summary>
+            <returns>HashSet containing onclick events value</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.HasAjaxCallAsync">
+            <summary>
+            Check if some JS file has an Ajax call
+            </summary>
+            <returns>True</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.HasAjaxCall">
+            <summary>
+            Check if some JS file has an Ajax call
+            </summary>
+            <returns>True</returns>
+        </member>
         <member name="T:Expose.Main.ReportHtmlDocument">
             <summary>
             Report about the DOM
@@ -185,6 +209,26 @@
         <member name="P:Expose.Main.ReportHtmlDocument.AmountCSSContent">
             <summary>
             How many CSS Content is in the page
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.AmountOnclickEvents">
+            <summary>
+            How many onclick Events is in the page
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.FormInfo">
+            <summary>
+            Informations about the Forms
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.OnclickValues">
+            <summary>
+            Onclick values
+            </summary>
+        </member>
+        <member name="P:Expose.Main.ReportHtmlDocument.HasAjaxCall">
+            <summary>
+            Check if some JS file has ajax call
             </summary>
         </member>
     </members>

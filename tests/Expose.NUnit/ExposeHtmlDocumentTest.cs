@@ -82,7 +82,7 @@ namespace Expose.NUnit
         }
 
         [Test]
-        public async Task JSContent_Should_Return_Value_Grater_Than_Zero_Async()
+        public async Task GetJSContent_Should_Return_Value_Grater_Than_Zero_Async()
         {
             var hsJS = await document.GetJSContentAsync();
             int value = hsJS.Count;
@@ -122,7 +122,7 @@ namespace Expose.NUnit
         }
 
         [Test]
-        public async Task CountJSEvents_Should_Return_Value_Grater_Than_Zero_Async()
+        public async Task CountOnclickEvents_Should_Return_Value_Grater_Than_Zero_Async()
         {
             int value = await document.CountOnclickEventsAsync();
 
@@ -130,7 +130,7 @@ namespace Expose.NUnit
         }
 
         [Test]
-        public void CountJSEvents_Should_Return_Value_Grater_Than_Zero()
+        public void CountOnclickEvents_Should_Return_Value_Grater_Than_Zero()
         {
             int value = document.CountOnclickEvents();
 
@@ -187,6 +187,27 @@ namespace Expose.NUnit
             Assert.Greater(value, Constants.ZERO);
         }
 
+        [Test]        
+        public async Task GetOnClickValue_Should_Return_Value_Grater_Than_Zero_Async()
+        {
+            HashSet<string> hsOnclick = await document.GetOnClickValueAsync();
+            int countEvents = await document.CountOnclickEventsAsync();
+            
+            int value = hsOnclick.Count;
+
+            Assert.Greater(value, Constants.ZERO);
+        }
+
+        [Test]
+        public void GetOnClickValue_Should_Return_Value_Grater_Than_Zero()
+        {
+            HashSet<string> hsOnclick = document.GetOnClickValue();
+            int countEvents = document.CountOnclickEvents();
+            int value = hsOnclick.Count;
+
+            Assert.Greater(value, Constants.ZERO);
+        }
+
         [Test]
         public async Task GetReport_Should_Return_Value_Grater_Than_Zero_Async()
         {
@@ -205,6 +226,19 @@ namespace Expose.NUnit
 
             Assert.Greater(value, Constants.ZERO);
 
+        }
+
+        [Test]
+        public async Task HasAjaxCall_Should_Return_False_Async()
+        {
+            Assert.IsTrue(await document.HasAjaxCallAsync());
+            
+        }
+
+        [Test]
+        public void HasAjaxCall_Should_Return_False()
+        {
+            Assert.IsTrue(document.HasAjaxCall());
         }
     }
 }

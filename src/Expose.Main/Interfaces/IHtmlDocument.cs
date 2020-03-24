@@ -29,14 +29,22 @@ namespace Expose.Main.Interfaces
         Task<string> GetReportAsync();
         string GetReport();
 
+        Task<bool> HasAjaxCallAsync();
+        bool HasAjaxCall();
+
         Task<Dictionary<string,string>> FormsInfoAsync();
         Dictionary<string, string> FormsInfo();
 
         Task<HashSet<string>> GetJSContentAsync();
         HashSet<string> GetJSContent();
 
+        Task<HashSet<string>> GetOnClickValueAsync();
+        HashSet<string> GetOnClickValue();
+
         Task<HashSet<string>> GetCSSContentAsync();
         HashSet<string> GetCSSContent();
+
+        
 
     }
 

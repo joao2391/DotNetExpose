@@ -22,7 +22,8 @@ namespace Expose.Main
         private readonly IBrowsingContext _browsingContext;
         private readonly IDocument _document;
         private string _url = string.Empty;
-        
+        private HashSet<string> _hsOnClick;
+
 
         /// <summary>
         /// Constructor
@@ -34,6 +35,7 @@ namespace Expose.Main
             _browsingContext = BrowsingContext.New(_config);
             _document = _browsingContext.OpenAsync(url).Result;
             _url = url;
+            _hsOnClick = new HashSet<string>();
         }
 
         /// <summary>
@@ -300,13 +302,16 @@ namespace Expose.Main
         /// </summary>
         /// <returns>The size in Kb of the page</returns>
         public async Task<long?> GetSizeOfPageAsync()
-        {
-            var document = await _browsingContext.OpenAsync(_url);
-            HttpClient client = new HttpClient();
+        {            
             long? sizeOfPage = 0;
-            var result = await client.GetAsync(_url);
-            var tamanho = result.Content.Headers.ContentLength;
-             sizeOfPage = tamanho / 1024;
+
+            using (HttpClient client = new HttpClient())
+            {               
+                var result = await client.GetAsync(_url);
+                var tamanho = result.Content.Headers.ContentLength;
+                sizeOfPage = tamanho / 1024;
+            }
+              
 
             return sizeOfPage;
         }
@@ -317,11 +322,15 @@ namespace Expose.Main
         /// <returns>The size in Kb of the page</returns>
         public long? GetSizeOfPage()
         {            
-            HttpClient client = new HttpClient();
             long? sizeOfPage = 0;
-            var result = client.GetAsync(_url).Result;
-            var tamanho = result.Content.Headers.ContentLength;
-            sizeOfPage = tamanho / 1024;
+
+            using (HttpClient client = new HttpClient())
+            {
+                var result = client.GetAsync(_url).Result;
+                var tamanho = result.Content.Headers.ContentLength;
+                sizeOfPage = tamanho / 1024;
+            }
+
 
             return sizeOfPage;
         }
@@ -346,6 +355,51 @@ namespace Expose.Main
             string retorno = GenerateReportAsync().Result;
 
             return retorno;
+        }
+
+        /// <summary>
+        /// The onclick event value
+        /// </summary>
+        /// <returns>HashSet containing onclick events value</returns>
+        public async Task<HashSet<string>> GetOnClickValueAsync()
+        {
+            HashSet<string> hsOnclick = await OnClickValues();
+
+            return hsOnclick;
+        }
+
+        /// <summary>
+        /// The onclick event value
+        /// </summary>
+        /// <returns>HashSet containing onclick events value</returns>
+        public HashSet<string> GetOnClickValue()
+        {
+
+            HashSet<string> hsOnClick = OnClickValues().Result;
+
+            return hsOnClick;
+        }
+
+        /// <summary>
+        /// Check if some JS file has an Ajax call
+        /// </summary>
+        /// <returns>True</returns>
+        public async Task<bool> HasAjaxCallAsync()
+        {
+            bool hasAjaxCall = await CheckAjaxCall();
+
+            return hasAjaxCall;
+        }
+
+        /// <summary>
+        /// Check if some JS file has an Ajax call
+        /// </summary>
+        /// <returns>True</returns>
+        public bool HasAjaxCall()
+        {
+            bool hasAjaxCall = CheckAjaxCall().Result;
+
+            return hasAjaxCall;
         }
 
         #region Private Methods
@@ -399,33 +453,41 @@ namespace Expose.Main
 
         private async Task<int> CountJSEvents()
         {
-            HttpClient client = new HttpClient();
             int countEvents = 0;
-            var result = await client.GetAsync(_url).Result.Content.ReadAsStringAsync();
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(result);
 
-            var body = doc.DocumentNode.SelectSingleNode("//body");
-            
-            for (int i = 0; i < body.ChildNodes.Count; i++)
-            {
+            using (HttpClient client = new HttpClient())
+            {                
+                var result = await client.GetAsync(_url).Result.Content.ReadAsStringAsync();
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(result);
 
-                if (body.ChildNodes[i].Attributes.Contains("onclick"))
+                var body = doc.DocumentNode.SelectSingleNode("//body");
+
+                for (int i = 0; i < body.ChildNodes.Count; i++)
                 {
-                    countEvents++;
-                    
-                    continue;
 
-                }else if (body.ChildNodes[i].HasChildNodes)
-                {                   
-
-                    for (int j = 0; j < body.ChildNodes[i].ChildNodes.Count; j++)
+                    if (body.ChildNodes[i].Attributes.Contains("onclick"))
                     {
-                        CountRec(ref countEvents, body.ChildNodes[i].ChildNodes[j]);
-                    }
-                }
+                        countEvents++;
+                        var s = body.ChildNodes[i].Attributes;
 
+                        _hsOnClick.Add(body.ChildNodes[i].GetAttributeValue("onclick", string.Empty));
+
+                        continue;
+
+                    }
+                    else if (body.ChildNodes[i].HasChildNodes)
+                    {
+
+                        for (int j = 0; j < body.ChildNodes[i].ChildNodes.Count; j++)
+                        {
+                            CountRec(ref countEvents, body.ChildNodes[i].ChildNodes[j]);
+                        }
+                    }
+
+                }
             }
+                
 
             return countEvents;
         }
@@ -438,7 +500,8 @@ namespace Expose.Main
                 {
                     if (childNodes.ChildNodes[i].Attributes.Contains("onclick"))
                     {                        
-                        countEvents++;                        
+                        countEvents++;
+                        _hsOnClick.Add(childNodes.ChildNodes[i].GetAttributeValue("onclick", string.Empty));
                     }
                     else
                     {                        
@@ -450,7 +513,7 @@ namespace Expose.Main
             else if(childNodes.Attributes.Contains("onclick"))
             {
                 countEvents++;
-                
+                _hsOnClick.Add(childNodes.GetAttributeValue("onclick", string.Empty));
             }         
 
             return countEvents;
@@ -488,12 +551,82 @@ namespace Expose.Main
                 AmountJS = await CountJSAsync(),
                 AmountJSContent = GetJSContentAsync().Result.Count,
                 AmountMeta = await CountMetaAsync(),
-                Id = new Guid()
+                AmountOnclickEvents = await CountOnclickEventsAsync(),
+                FormInfo = await FormsInfoAsync(),
+                OnclickValues = await GetOnClickValueAsync(),
+                HasAjaxCall = await HasAjaxCallAsync(),
+                Id = Guid.NewGuid()
             };
 
-            string retorno = JsonConvert.SerializeObject(report);
+            string reportJson = JsonConvert.SerializeObject(report);
 
-            return retorno;
+            return reportJson;
+
+        }
+
+        private async Task<HashSet<string>> OnClickValues()
+        {
+            HashSet<string> hsOnClick = await Task.FromResult(_hsOnClick);
+
+            return hsOnClick;
+        }
+
+        private async Task<bool> CheckAjaxCall()
+        {
+            string resultJs = string.Empty;
+            bool hasAjaxCall = false;
+            List<HtmlAttributeCollection> lstHtmlAttributes = new List<HtmlAttributeCollection>();
+
+            using (HttpClient client = new HttpClient())
+            {
+                var result = await client.GetAsync(_url).Result.Content.ReadAsStringAsync();
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(result);
+
+                var head = doc.DocumentNode.SelectSingleNode("/html/head");
+
+                for (int i = 0; i < head.ChildNodes.Count; i++)
+                {
+
+                    if (head.ChildNodes[i].Name == "script" && head.ChildNodes[i].Attributes.Count > 0)
+                    {
+                        lstHtmlAttributes.Add(head.ChildNodes[i].Attributes);
+
+                    }
+
+                }
+
+                for (int i = 0; i < lstHtmlAttributes.Count; i++)
+                {
+                    try
+                    {
+                        string value = string.Empty;
+
+                        for (int j = 0; j < lstHtmlAttributes[i].Count; j++)
+                        {
+                            if (lstHtmlAttributes[i][j].Name == "src")
+                            {
+                                value = lstHtmlAttributes[i][j].Value;
+                            }
+                        }
+
+
+                        resultJs = await client.GetAsync(value).Result.Content.ReadAsStringAsync();
+
+                        if (resultJs.Contains("$.ajax"))
+                        {
+                            hasAjaxCall = true;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+
+                }
+            }
+
+            return hasAjaxCall;
 
         }
 

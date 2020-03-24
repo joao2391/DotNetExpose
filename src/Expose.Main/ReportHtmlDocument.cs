@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Expose.Main
 {
@@ -56,6 +57,26 @@ namespace Expose.Main
         /// How many CSS Content is in the page
         /// </summary>
         public int AmountCSSContent { get; set; }
+
+        /// <summary>
+        /// How many onclick Events is in the page
+        /// </summary>
+        public int AmountOnclickEvents { get; set; }
+
+        /// <summary>
+        /// Informations about the Forms
+        /// </summary>
+        public Dictionary<string, string> FormInfo { get; set; }
+
+        /// <summary>
+        /// Onclick values
+        /// </summary>
+        public HashSet<string> OnclickValues { get; set; }
+
+        /// <summary>
+        /// Check if some JS file has ajax call
+        /// </summary>
+        public bool HasAjaxCall { get; set; }
 
     }
 }
