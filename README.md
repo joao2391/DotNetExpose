@@ -4,6 +4,7 @@ DotNetExpose is a .Net library for helping you to scrap web pages. It shows you 
 
 ## Notes
 Version 1.0.3:
+
 Added a function that checks if the page has Ajax calls
 
 ## Installation
