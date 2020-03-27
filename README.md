@@ -3,15 +3,15 @@
 DotNetExpose is a .Net library for helping you to scrap web pages. It shows you a lot of information about the page.
 
 ## Notes
-Version 1.0.1:
-Added a report function. It allows you to get a report on all information. The return type is a JSON.
+Version 1.0.3:
+Added a function that checks if the page has Ajax calls
 
 ## Installation
 
 Use the package manager to install.
 
 ```bash
-Install-Package DotNetExpose -Version 1.0.1
+Install-Package DotNetExpose -Version 1.0.3
 ```
 
 ## Usage
@@ -71,6 +71,10 @@ long? pageSize = expose.GetSizeOfPageAsync();
 Return the JSON with the amount of info found
 ```C#
 string report = expose.GetReportAsync();
+```
+Return True/False 
+```C#
+bool hasAjaxCall = expose.HasAjaxCallAsync();
 ```
 
 ## Contributing
