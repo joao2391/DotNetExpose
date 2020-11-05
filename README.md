@@ -1,6 +1,7 @@
 # DotNetExpose [![Build Status](https://travis-ci.org/joao2391/DotNetExpose.svg?branch=master)](https://travis-ci.org/joao2391/DotNetExpose) [![Nuget](https://img.shields.io/nuget/v/DotNetExpose)](https://www.nuget.org/packages/DotNetExpose/) ![Nuget](https://img.shields.io/nuget/dt/DotNetExpose)
 
 DotNetExpose is a .Net library for helping you to scrap web pages. It shows you a lot of information about the page.
+You can use both in .NET Framework 4.x and .NET Core 2.x applications.
 
 ## Notes
 Version 1.0.3:
