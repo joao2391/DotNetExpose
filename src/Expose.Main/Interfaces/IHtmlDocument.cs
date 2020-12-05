@@ -43,9 +43,6 @@ namespace Expose.Main.Interfaces
 
         Task<HashSet<string>> GetCSSContentAsync();
         HashSet<string> GetCSSContent();
-
-        
-
     }
 
 }
