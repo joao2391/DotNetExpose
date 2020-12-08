@@ -1,6 +1,6 @@
 language: csharp
 solution: Expose.sln
-dotnet: 2.1.502
+dotnet: 5.0.100
 install:
   - curl -L -o nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
   - mono nuget.exe restore Expose.sln
