@@ -13,7 +13,7 @@ Changed to .NET 5
 Use the package manager to install.
 
 ```bash
-Install-Package DotNetExpose -Version 1.0.3
+Install-Package DotNetExpose -Version 1.0.4
 ```
 
 ## Usage
