@@ -23,6 +23,7 @@ namespace Expose.Main
         private readonly IDocument _document;
         private string _url = string.Empty;
         private HashSet<string> _hsOnClick;
+        private HttpClient _httpClient;
 
 
         /// <summary>
@@ -36,6 +37,7 @@ namespace Expose.Main
             _document = _browsingContext.OpenAsync(url).Result;
             _url = url;
             _hsOnClick = new HashSet<string>();
+            _httpClient = new HttpClient();
         }
 
         /// <summary>
@@ -455,39 +457,35 @@ namespace Expose.Main
         {
             int countEvents = 0;
 
-            using (HttpClient client = new HttpClient())
-            {                
-                var result = await client.GetAsync(_url).Result.Content.ReadAsStringAsync();
-                HtmlDocument doc = new HtmlDocument();
-                doc.LoadHtml(result);
+            var result = await _httpClient.GetAsync(_url);
+            var html = await result.Content.ReadAsStringAsync();
+            var doc = new HtmlDocument();
+            doc.LoadHtml(html);
 
-                var body = doc.DocumentNode.SelectSingleNode("//body");
+            var body = doc.DocumentNode.SelectSingleNode("//body");
 
-                for (int i = 0; i < body.ChildNodes.Count; i++)
+            for (int i = 0; i < body.ChildNodes.Count; i++)
+            {
+
+                if (body.ChildNodes[i].Attributes.Contains("onclick"))
                 {
+                    countEvents++;
+                    var s = body.ChildNodes[i].Attributes;
 
-                    if (body.ChildNodes[i].Attributes.Contains("onclick"))
-                    {
-                        countEvents++;
-                        var s = body.ChildNodes[i].Attributes;
+                    _hsOnClick.Add(body.ChildNodes[i].GetAttributeValue("onclick", string.Empty));
 
-                        _hsOnClick.Add(body.ChildNodes[i].GetAttributeValue("onclick", string.Empty));
-
-                        continue;
-
-                    }
-                    else if (body.ChildNodes[i].HasChildNodes)
-                    {
-
-                        for (int j = 0; j < body.ChildNodes[i].ChildNodes.Count; j++)
-                        {
-                            CountRec(ref countEvents, body.ChildNodes[i].ChildNodes[j]);
-                        }
-                    }
+                    continue;
 
                 }
-            }
-                
+                else if (body.ChildNodes[i].HasChildNodes)
+                {
+
+                    for (int j = 0; j < body.ChildNodes[i].ChildNodes.Count; j++)
+                    {
+                        CountRec(ref countEvents, body.ChildNodes[i].ChildNodes[j]);
+                    }
+                }
+            } 
 
             return countEvents;
         }
