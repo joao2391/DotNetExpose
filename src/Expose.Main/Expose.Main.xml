@@ -68,10 +68,30 @@
             </summary>
             <returns>Return total of META elements</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetJSContentAsync" -->
-        <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetJSContent" -->
-        <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetCSSContentAsync" -->
-        <!-- Badly formed XML comment ignored for member "M:Expose.Main.ExposeHtmlDocument.GetCSSContent" -->
+        <member name="M:Expose.Main.ExposeHtmlDocument.GetJSContentAsync">
+            <summary>
+            Get the text content from JavaScript
+            </summary>
+            <returns>A HashSet of string containing the JavaScript</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.GetJSContent">
+            <summary>
+            Get the text content from JavaScript
+            </summary>
+            <returns>A HashSet of string containing the JavaScript</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.GetCSSContentAsync">
+            <summary>
+            Get the text content from CSS
+            </summary>
+            <returns>A HashSet of string containing the CSS</returns>
+        </member>
+        <member name="M:Expose.Main.ExposeHtmlDocument.GetCSSContent">
+            <summary>
+            Get the text content from CSS
+            </summary>
+            <returns>A HashSet of string containing the CSS</returns>
+        </member>
         <member name="M:Expose.Main.ExposeHtmlDocument.CountOnclickEventsAsync">
             <summary>
             Count the onclick events

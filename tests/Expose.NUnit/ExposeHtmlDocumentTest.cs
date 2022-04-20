@@ -1,18 +1,23 @@
 using Expose.Main;
+using System.Threading;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Moq;
+using AngleSharp;
+using AngleSharp.Dom;
 
 namespace Expose.NUnit
 {
     public class ExposeHtmlDocumentTest
     {
-        private ExposeHtmlDocument document;        
+        private ExposeHtmlDocument document;
 
+        
         [SetUp]
         public void Setup()
         {
-            document = new ExposeHtmlDocument(Constants.URL_STACKOVERFLOW_PT);      
+            document = new ExposeHtmlDocument(Constants.URL_STACKOVERFLOW_PT);            
         }
 
         [Test]
@@ -20,7 +25,7 @@ namespace Expose.NUnit
         {            
            
             int value = await document.CountCSSAsync();
-
+            
             Assert.Greater(value, Constants.ZERO);
         }
 

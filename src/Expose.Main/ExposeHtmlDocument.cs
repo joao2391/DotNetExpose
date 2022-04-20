@@ -46,10 +46,9 @@ namespace Expose.Main
         /// <returns>Return total of CSS files referenced in the html page</returns>
         public async Task<int> CountCSSAsync()
         {
-            var document = await _browsingContext.OpenAsync(_url);            
+            var document = await _browsingContext.OpenAsync(_url);
             
-            
-            int countCSS = 0;//document.Head.GetElementsByTagName("link").Length;
+            int countCSS = 0;
 
             CountCSSInHeadChildren(ref countCSS, document);
             CountCSSInBodyChildren(ref countCSS, document);
@@ -65,7 +64,7 @@ namespace Expose.Main
         public int CountCss()
         {           
 
-            int countCSS = 0;//document.Head.GetElementsByTagName("link").Length;
+            int countCSS = 0;
 
             CountCSSInHeadChildren(ref countCSS, _document);
             CountCSSInBodyChildren(ref countCSS, _document);
@@ -153,7 +152,7 @@ namespace Expose.Main
         }
 
         /// <summary>
-        /// Get the text content from <script> Html Tag 
+        /// Get the text content from JavaScript
         /// </summary>
         /// <returns>A HashSet of string containing the JavaScript</returns>
         public async Task<HashSet<string>> GetJSContentAsync()
@@ -171,7 +170,7 @@ namespace Expose.Main
         }
 
         /// <summary>
-        /// Get the text content from <script> Html Tag 
+        /// Get the text content from JavaScript
         /// </summary>
         /// <returns>A HashSet of string containing the JavaScript</returns>
         public HashSet<string> GetJSContent()
@@ -188,7 +187,7 @@ namespace Expose.Main
         }
 
         /// <summary>
-        /// Get the text content from <style> Html Tag 
+        /// Get the text content from CSS
         /// </summary>
         /// <returns>A HashSet of string containing the CSS</returns>
         public async Task<HashSet<string>> GetCSSContentAsync()
@@ -207,7 +206,7 @@ namespace Expose.Main
         }
 
         /// <summary>
-        /// Get the text content from <style> Html Tag 
+        /// Get the text content from CSS
         /// </summary>
         /// <returns>A HashSet of string containing the CSS</returns>
         public HashSet<string> GetCSSContent()
