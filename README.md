@@ -3,9 +3,9 @@
 DotNetExpose is a .Net library for helping you to scrap web pages. It shows you a lot of information about the page.
 
 ## Notes
-Version 1.0.5:
+Version 2.0.0:
 
-- Upgrade to .NET 6
+- Upgrade to .NET 9
 
 ## Installation
 
