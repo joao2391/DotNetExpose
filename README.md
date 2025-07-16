@@ -12,7 +12,7 @@ Version 2.0.0:
 Use the package manager to install.
 
 ```bash
-Install-Package DotNetExpose -Version 1.0.5
+Install-Package DotNetExpose -Version 2.0.0
 ```
 
 ## Usage
