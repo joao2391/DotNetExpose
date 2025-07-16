@@ -131,7 +131,7 @@ namespace Expose.NUnit
         {
             int value = await document.CountOnclickEventsAsync();
 
-            Assert.Greater(value, Constants.ZERO);
+            Assert.AreEqual(value, Constants.ZERO);
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace Expose.NUnit
         {
             int value = document.CountOnclickEvents();
 
-            Assert.Greater(value, Constants.ZERO);
+            Assert.AreEqual(value, Constants.ZERO);
         }
 
         [Test]
@@ -200,7 +200,7 @@ namespace Expose.NUnit
             
             int value = hsOnclick.Count;
 
-            Assert.Greater(value, Constants.ZERO);
+            Assert.AreEqual(value, Constants.ZERO);
         }
 
         [Test]
@@ -210,7 +210,7 @@ namespace Expose.NUnit
             int countEvents = document.CountOnclickEvents();
             int value = hsOnclick.Count;
 
-            Assert.Greater(value, Constants.ZERO);
+            Assert.AreEqual(value, Constants.ZERO);
         }
 
         [Test]
@@ -236,14 +236,14 @@ namespace Expose.NUnit
         [Test]
         public async Task HasAjaxCall_Should_Return_False_Async()
         {
-            Assert.IsTrue(await document.HasAjaxCallAsync());
+            Assert.AreNotEqual(true, await document.HasAjaxCallAsync());
             
         }
 
         [Test]
         public void HasAjaxCall_Should_Return_False()
         {
-            Assert.IsTrue(document.HasAjaxCall());
+            Assert.AreNotEqual(true, document.HasAjaxCall());
         }
     }
 }

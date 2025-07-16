@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace Expose.Main
 {
     /// <summary>
-    /// Expose a lot of information about the page
+    /// Expose a lot of information about the page.
     /// </summary>
     public class ExposeHtmlDocument : IHtmlDocument
     {
